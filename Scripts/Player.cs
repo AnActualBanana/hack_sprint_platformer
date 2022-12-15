@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public int health = 10;
     public float moveSpeed = 10.0f;
 
     public Rigidbody2D player;

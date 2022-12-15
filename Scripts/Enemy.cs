@@ -7,13 +7,15 @@ public class Enemy : MonoBehaviour
 
     public Rigidbody2D enemy; //reference to itself
 
-    public float moveSpeed = 15.0f;
+    public float moveSpeed = 0.001f;
 
     public bool changeDirection = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+
         enemy = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -25,14 +27,16 @@ public class Enemy : MonoBehaviour
 
     public void moveEnemy()
     {
-        if (changeDirection == true)
-            {
-                enemy.velocity = new Vector2(1, 0) * -1 * moveSpeed;
-            }
+        if (enemy != null) {
+            if (changeDirection == true)
+                {
+                    enemy.velocity = new Vector2(1, 0) * -1 * moveSpeed;
+                }
             else if (changeDirection == false)
-            {
-                enemy.velocity = new Vector2(1, 0) * moveSpeed;
-            }
+                {
+                    enemy.velocity = new Vector2(1, 0) * moveSpeed;
+                }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -46,6 +50,11 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Hit left wall");
             changeDirection = false;
+        }
+        if (col.gameObject.name == "Player_projectile(Clone)")
+        {
+            Debug.Log("projectile");
+            Destroy(this.gameObject);
         }
     }
 }
